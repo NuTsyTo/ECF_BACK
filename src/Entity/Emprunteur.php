@@ -27,6 +27,9 @@ class Emprunteur
     #[ORM\OneToMany(mappedBy: 'emprunteurs', targetEntity: Emprunt::class)]
     private Collection $emprunts;
 
+    #[ORM\OneToOne(mappedBy: 'emprunteur', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
@@ -99,6 +102,23 @@ class Emprunteur
                 $emprunt->setEmprunteurs(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        // set the owning side of the relation if necessary
+        if ($user->getEmprunteur() !== $this) {
+            $user->setEmprunteur($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

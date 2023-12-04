@@ -30,6 +30,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $Enabled = null;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Emprunteur $emprunteur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +112,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEnabled(bool $Enabled): static
     {
         $this->Enabled = $Enabled;
+
+        return $this;
+    }
+
+    public function getEmprunteur(): ?Emprunteur
+    {
+        return $this->emprunteur;
+    }
+
+    public function setEmprunteur(Emprunteur $emprunteur): static
+    {
+        $this->emprunteur = $emprunteur;
 
         return $this;
     }
