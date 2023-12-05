@@ -19,10 +19,10 @@ class Emprunteur
     private ?string $nom = null;
 
     #[ORM\Column(length: 190)]
-    private ?string $Prenom = null;
+    private ?string $prenom = null;
 
     #[ORM\Column(length: 190)]
-    private ?string $Telephone = null;
+    private ?string $telephone = null;
 
     #[ORM\OneToMany(mappedBy: 'emprunteurs', targetEntity: Emprunt::class)]
     private Collection $emprunts;
@@ -54,24 +54,24 @@ class Emprunteur
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): static
+    public function setPrenom(string $prenom): static
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     public function getTelephone(): ?string
     {
-        return $this->Telephone;
+        return $this->telephone;
     }
 
-    public function setTelephone(string $Telephone): static
+    public function setTelephone(string $telephone): static
     {
-        $this->Telephone = $Telephone;
+        $this->$telephone = $telephone;
 
         return $this;
     }
